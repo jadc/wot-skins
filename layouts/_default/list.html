@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="{{ .Site.Language }}">
+    <head>
+        {{ partial "header.html" . }}
+        <title>{{ if not .IsHome }}{{ .Title | title }} | {{ end }}{{ .Site.Title }}</title>
+        <meta content="{{ if not .IsHome }}{{ .Title | title }} | {{ end }}{{ .Site.Title }}" property="og:title" />
+    </head>
+    <body>
+        <aside>
+            <h1>Filter</h1>
+            <h2>Style</h2>
+            <form>
+                <label><input type="checkbox" checked>3D</input></label>
+                <label><input type="checkbox" checked>2D</input></label>
+            </form>
+            <h2>Tier</h2>
+            <form>
+                <label><input type="checkbox">I</input></label>
+                <label><input type="checkbox">II</input></label>
+                <label><input type="checkbox">III</input></label>
+                <label><input type="checkbox">IV</input></label>
+                <label><input type="checkbox">V</input></label>
+                <label><input type="checkbox">VI</input></label>
+                <label><input type="checkbox">VII</input></label>
+                <label><input type="checkbox">VIII</input></label>
+                <label><input type="checkbox">IX</input></label>
+                <label><input type="checkbox">X</input></label>
+            </form>
+            <h2>Class</h2>
+            <form>
+                <label><input type="checkbox">Light</input></label>
+                <label><input type="checkbox">Medium</input></label>
+                <label><input type="checkbox">Heavy</input></label>
+                <label><input type="checkbox">TD</input></label>
+                <label><input type="checkbox">SPG</input></label>
+            </form>
+            <h2>Nation</h2>
+            <form>
+                <label><input type="checkbox">US</input></label>
+                <label><input type="checkbox">RU</input></label>
+                <label><input type="checkbox">GR</input></label>
+                <label><input type="checkbox">BR</input></label>
+                <label><input type="checkbox">IT</input></label>
+                <label><input type="checkbox">CZ</input></label>
+                <label><input type="checkbox">JP</input></label>
+                <label><input type="checkbox">CH</input></label>
+                <label><input type="checkbox">PO</input></label>
+                <label><input type="checkbox">SW</input></label>
+            </form>
+        </aside>
+        <main>
+            <nav>
+                <input id='search' type='text' placeholder='Search...' spellcheck='false' autocomplete='off'>
+            </nav>
+            {{ with .Pages }}
+                {{ range sort . ".Date" "desc" }}
+                {{ $thumbnail := index (.Params.images) 0 }}
+                <a class='page' href="{{ .RelPermalink }}" style="background-image: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.5)), url({{$thumbnail}})">
+                    <span>
+                        <h1>{{ replace .File.BaseFileName "-" " " | title }}</h1>
+                        <p>{{ .Params.Tank }} - {{ .Summary | truncate 20 }}</p>
+                    </span>
+                </a>
+                {{ end }}
+            {{ end }}
+        </main>
+
+        <!-- <script src='/search.js'></script> -->
+    </body>
+</html>

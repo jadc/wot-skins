@@ -1,0 +1,8 @@
+title = 'chems'
+languageCode = 'en-us'
+baseURL = 'http://example.com'
+
+[taxonomies]
+  tier = 'tier'
+  class = 'class'
+  nation = 'nation'

@@ -1,0 +1,23 @@
+<link rel='stylesheet' type='text/css' href='/style.css'>
+
+<!-- Icon -->
+<link rel="icon" href="/icon.svg">
+<meta content="/icon.svg" property="og:image" />
+
+<!-- Discord embed -->
+<meta content="{{ .Site.BaseURL }}" property="og:url" />
+<meta content="#2F3136" data-react-helmet="true" name="theme-color" />
+
+<!-- Font -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Roboto&family=Roboto+Mono&display=swap" rel="stylesheet">
+
+<!-- SEO -->
+<meta name="description" content="{{ .Summary }}">
+<link rel="canonical" href="{{ .Site.BaseURL }}">
+<!-- {{ if isset .Params "tags" }}<meta name="keywords" content="{{ with .Params.tags }}{{ delimit . ", " }}{{ end }}">{{ end }} -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="index, follow">
+<meta charset="utf-8">
