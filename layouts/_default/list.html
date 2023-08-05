@@ -7,58 +7,66 @@
     </head>
     <body>
         <aside>
-            <h1>Filter</h1>
-            <h2>Style</h2>
-            <form>
-                <label><input type="checkbox" checked>3D</input></label>
-                <label><input type="checkbox" checked>2D</input></label>
-            </form>
-            <h2>Tier</h2>
-            <form>
-                <label><input type="checkbox">I</input></label>
-                <label><input type="checkbox">II</input></label>
-                <label><input type="checkbox">III</input></label>
-                <label><input type="checkbox">IV</input></label>
-                <label><input type="checkbox">V</input></label>
-                <label><input type="checkbox">VI</input></label>
-                <label><input type="checkbox">VII</input></label>
-                <label><input type="checkbox">VIII</input></label>
-                <label><input type="checkbox">IX</input></label>
-                <label><input type="checkbox">X</input></label>
-            </form>
-            <h2>Class</h2>
-            <form>
-                <label><input type="checkbox">Light</input></label>
-                <label><input type="checkbox">Medium</input></label>
-                <label><input type="checkbox">Heavy</input></label>
-                <label><input type="checkbox">TD</input></label>
-                <label><input type="checkbox">SPG</input></label>
-            </form>
-            <h2>Nation</h2>
-            <form>
-                <label><input type="checkbox">US</input></label>
-                <label><input type="checkbox">RU</input></label>
-                <label><input type="checkbox">GR</input></label>
-                <label><input type="checkbox">BR</input></label>
-                <label><input type="checkbox">IT</input></label>
-                <label><input type="checkbox">CZ</input></label>
-                <label><input type="checkbox">JP</input></label>
-                <label><input type="checkbox">CH</input></label>
-                <label><input type="checkbox">PO</input></label>
-                <label><input type="checkbox">SW</input></label>
-            </form>
+            <input id='search' type='text' placeholder='Search...' spellcheck='false' autocomplete='off'>
+            <section>
+                <h2>Style</h2>
+                <form >
+                    <label style="--icon: url('icons/3d.webp')"><input type="checkbox">3D</input></label>
+                    <label style="--icon: url('icons/2d.webp')"><input type="checkbox">2D</input></label>
+                </form>
+            </section>
+            <section>
+                <h2>Tier</h2>
+                <form>
+                    <label style="--icon: url('icons/tier/1.webp')"><input type="checkbox">1</input></label>
+                    <label style="--icon: url('icons/tier/2.webp')"><input type="checkbox">2</input></label>
+                    <label style="--icon: url('icons/tier/3.webp')"><input type="checkbox">3</input></label>
+                    <label style="--icon: url('icons/tier/4.webp')"><input type="checkbox">4</input></label>
+                    <label style="--icon: url('icons/tier/5.webp')"><input type="checkbox">5</input></label>
+                    <label style="--icon: url('icons/tier/6.webp')"><input type="checkbox">6</input></label>
+                    <label style="--icon: url('icons/tier/7.webp')"><input type="checkbox">7</input></label>
+                    <label style="--icon: url('icons/tier/8.webp')"><input type="checkbox">8</input></label>
+                    <label style="--icon: url('icons/tier/9.webp')"><input type="checkbox">9</input></label>
+                    <label style="--icon: url('icons/tier/10.webp')"><input type="checkbox">10</input></label>
+                </form>
+            </section>
+            <section>
+                <h2>Class</h2>
+                <form>
+                    <label style="--icon: url('icons/class/lt.webp')"><input type="checkbox">LT</input></label>
+                    <label style="--icon: url('icons/class/mt.webp')"><input type="checkbox">MT</input></label>
+                    <label style="--icon: url('icons/class/ht.webp')"><input type="checkbox">HT</input></label>
+                    <label style="--icon: url('icons/class/td.webp')"><input type="checkbox">TD</input></label>
+                    <label style="--icon: url('icons/class/spg.webp')"><input type="checkbox">SPG</input></label>
+                </form>
+            </section>
+            <section>
+                <h2>Nation</h2>
+                <form>
+                    <label style="--icon: url('icons/nation/us.webp')"><input type="checkbox">US</input></label>
+                    <label style="--icon: url('icons/nation/ru.webp')"><input type="checkbox">RU</input></label>
+                    <label style="--icon: url('icons/nation/gr.webp')"><input type="checkbox">GR</input></label>
+                    <label style="--icon: url('icons/nation/fr.webp')"><input type="checkbox">FR</input></label>
+                    <label style="--icon: url('icons/nation/it.webp')"><input type="checkbox">IT</input></label>
+                    <label style="--icon: url('icons/nation/cz.webp')"><input type="checkbox">CZ</input></label>
+                    <label style="--icon: url('icons/nation/jp.webp')"><input type="checkbox">JP</input></label>
+                    <label style="--icon: url('icons/nation/ch.webp')"><input type="checkbox">CH</input></label>
+                    <label style="--icon: url('icons/nation/po.webp')"><input type="checkbox">PO</input></label>
+                    <label style="--icon: url('icons/nation/sw.webp')"><input type="checkbox">SW</input></label>
+                </form>
+            </section>
+            <section class='ad'>
+                your add here
+            </section>
         </aside>
         <main>
-            <nav>
-                <input id='search' type='text' placeholder='Search...' spellcheck='false' autocomplete='off'>
-            </nav>
             {{ with .Pages }}
                 {{ range sort . ".Date" "desc" }}
-                {{ $thumbnail := index (.Params.images) 0 }}
+                {{ $thumbnail := index .Params.images 0 }}
                 <a class='page' href="{{ .RelPermalink }}" style="background-image: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.5)), url({{$thumbnail}})">
                     <span>
                         <h1>{{ replace .File.BaseFileName "-" " " | title }}</h1>
-                        <p>{{ .Params.Tank }} - {{ .Summary | truncate 20 }}</p>
+                        <p>{{ .Params.Tank }} - {{ .Summary }}</p>
                     </span>
                 </a>
                 {{ end }}

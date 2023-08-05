@@ -2,6 +2,8 @@ title = 'chems'
 languageCode = 'en-us'
 baseURL = 'http://example.com'
 
+disableKinds = ['taxonomy', 'term', 'tier', 'class', 'nation']
+
 [taxonomies]
   tier = 'tier'
   class = 'class'
