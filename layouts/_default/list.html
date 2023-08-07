@@ -7,7 +7,6 @@
     </head>
     <body>
         <aside>
-            <input id='search' type='text' placeholder='Search...' spellcheck='false' autocomplete='off'>
             <section id='style'>
                 <h2>Style</h2>
                 <div>
@@ -105,17 +104,7 @@
                         updateFilter(pages, query);
                     });
                 });
-
-                //console.log(query);
-                //const search = document.getElementById('search');
-                //search.addEventListener('input', updateFilter(pages));
-            })
-
-            /*
-            function clean(input){
-                return input.toLowerCase().trim().normalize('NFD');
-            }
-            */
+            });
 
             function updateFilter(pages, query){
                 pages.forEach(page => {
