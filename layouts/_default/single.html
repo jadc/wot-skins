@@ -2,14 +2,36 @@
 <html lang="{{ .Site.Language }}">
     <head>
         {{ partial "header.html" . }}
-        <title>{{ .Title | title }}</title>
+        <link rel='stylesheet' type='text/css' href='/single.css'>
+        {{ $SkinName := replace .File.BaseFileName "-" " " | upper }}
+        <title>{{ $SkinName }} - {{ .Params.tank }} Skin</title>
     </head>
     <body>
-        <header>
-            <h1>{{ .Title | title }}</h1>
-        </header>
-        <main>
-        {{ .Content }}
-        </main>
+        <article>
+            <header>
+                <h1>{{ $SkinName }}</h1>
+                <h2>for the {{ .Params.tank }}</h2>
+            </header>
+            {{ with .Params.images }}
+            <section>
+                <div class='slides'>
+                    {{ range $i, $el := . }}
+                    <img id='{{ $i }}' src='/{{ $el }}' />
+                    {{ end }}
+                </div>
+                <div class="thumbnails">
+                    {{ range $i, $el := . }}
+                    <a href='#{{ $i }}'>
+                        <img class='selectable' src='/{{ $el }}' alt='Slide {{ $i }}' />
+                    </a>
+                    {{ end }}
+                </div>
+            </section>
+            {{ end }}
+            <main>
+                {{ .Content }}
+                <a href='/'>Return</a>
+            </main>
+        </article>
     </body>
 </html>

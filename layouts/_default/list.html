@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="{{ .Site.Language }}">
     <head>
+        <link rel='stylesheet' type='text/css' href='/list.css'>
         {{ partial "header.html" . }}
         <title>{{ if not .IsHome }}{{ .Title | title }} | {{ end }}{{ .Site.Title }}</title>
         <meta content="{{ if not .IsHome }}{{ .Title | title }} | {{ end }}{{ .Site.Title }}" property="og:title" />
@@ -10,48 +11,48 @@
             <section id='style'>
                 <h2>Style</h2>
                 <div>
-                    <img class='option' src='icons/3d.webp' title='3D' />
-                    <img class='option' src='icons/2d.webp' title='2D' />
+                    <img class='option selectable' src='icons/3d.webp' title='3D' />
+                    <img class='option selectable' src='icons/2d.webp' title='2D' />
                 </div>
             </section>
             <section id='tier'>
                 <h2>Tier</h2>
                 <div>
-                    <img class='option' src='icons/tier/1.webp' title='1' />
-                    <img class='option' src='icons/tier/2.webp' title='2' />
-                    <img class='option' src='icons/tier/3.webp' title='3' />
-                    <img class='option' src='icons/tier/4.webp' title='4' />
-                    <img class='option' src='icons/tier/5.webp' title='5' />
-                    <img class='option' src='icons/tier/6.webp' title='6' />
-                    <img class='option' src='icons/tier/7.webp' title='7' />
-                    <img class='option' src='icons/tier/8.webp' title='8' />
-                    <img class='option' src='icons/tier/9.webp' title='9' />
-                    <img class='option' src='icons/tier/10.webp' title='10' />
+                    <img class='option selectable' src='icons/tier/1.webp' title='1' />
+                    <img class='option selectable' src='icons/tier/2.webp' title='2' />
+                    <img class='option selectable' src='icons/tier/3.webp' title='3' />
+                    <img class='option selectable' src='icons/tier/4.webp' title='4' />
+                    <img class='option selectable' src='icons/tier/5.webp' title='5' />
+                    <img class='option selectable' src='icons/tier/6.webp' title='6' />
+                    <img class='option selectable' src='icons/tier/7.webp' title='7' />
+                    <img class='option selectable' src='icons/tier/8.webp' title='8' />
+                    <img class='option selectable' src='icons/tier/9.webp' title='9' />
+                    <img class='option selectable' src='icons/tier/10.webp' title='10' />
                 </div>
             </section>
             <section id='class'>
                 <h2>Class</h2>
                 <div>
-                    <img class='option' src='icons/class/lt.webp' title='LT' />
-                    <img class='option' src='icons/class/mt.webp' title='MT' />
-                    <img class='option' src='icons/class/ht.webp' title='HT' />
-                    <img class='option' src='icons/class/td.webp' title='TD' />
-                    <img class='option' src='icons/class/spg.webp' title='SPG' />
+                    <img class='option selectable' src='icons/class/lt.webp' title='LT' />
+                    <img class='option selectable' src='icons/class/mt.webp' title='MT' />
+                    <img class='option selectable' src='icons/class/ht.webp' title='HT' />
+                    <img class='option selectable' src='icons/class/td.webp' title='TD' />
+                    <img class='option selectable' src='icons/class/spg.webp' title='SPG' />
                 </div>
             </section>
             <section id='nation'>
                 <h2>Nation</h2>
                 <div>
-                    <img class='option' src='icons/nation/us.webp' title='US' />
-                    <img class='option' src='icons/nation/ru.webp' title='RU' />
-                    <img class='option' src='icons/nation/gr.webp' title='GR' />
-                    <img class='option' src='icons/nation/fr.webp' title='FR' />
-                    <img class='option' src='icons/nation/it.webp' title='IT' />
-                    <img class='option' src='icons/nation/cz.webp' title='CZ' />
-                    <img class='option' src='icons/nation/jp.webp' title='JP' />
-                    <img class='option' src='icons/nation/ch.webp' title='CH' />
-                    <img class='option' src='icons/nation/po.webp' title='PO' />
-                    <img class='option' src='icons/nation/sw.webp' title='SW' />
+                    <img class='option selectable' src='icons/nation/us.webp' title='US' />
+                    <img class='option selectable' src='icons/nation/ru.webp' title='RU' />
+                    <img class='option selectable' src='icons/nation/gr.webp' title='GR' />
+                    <img class='option selectable' src='icons/nation/fr.webp' title='FR' />
+                    <img class='option selectable' src='icons/nation/it.webp' title='IT' />
+                    <img class='option selectable' src='icons/nation/cz.webp' title='CZ' />
+                    <img class='option selectable' src='icons/nation/jp.webp' title='JP' />
+                    <img class='option selectable' src='icons/nation/ch.webp' title='CH' />
+                    <img class='option selectable' src='icons/nation/po.webp' title='PO' />
+                    <img class='option selectable' src='icons/nation/sw.webp' title='SW' />
                 </div>
             </section>
             <section class='ad'>
@@ -62,7 +63,7 @@
             {{ with .Pages }}
                 {{ range sort . ".Date" "desc" }}
                 {{ $thumbnail := index .Params.images 0 }}
-                <a class='page' href="{{ .RelPermalink }}" 
+                <a class='page selectable' href="{{ .RelPermalink }}" 
                 data-tank="{{ .Params.tank }}" 
                 data-style="{{ .Params.style }}"
                 data-tier="{{ .Params.tier }}"
@@ -84,7 +85,7 @@
 
                 const pages = document.querySelectorAll('a.page');
 
-                // Maintains a set of all selected options for each category
+                // Maintains a set of all selected option for each category
                 let query = {
                     'style': new Set(),
                     'tier': new Set(),
