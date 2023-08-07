@@ -23,7 +23,6 @@ aside {
     display: flex;
     flex-direction: column;
     flex-basis: 20em;
-    border-radius: 2px;
     margin: 1em;
 }
 
@@ -31,6 +30,8 @@ aside section {
     background-color: rgb(127, 127, 127);
     border-bottom: 1px dashed #666;
     padding: 1em;
+    border-radius: 4px;
+    margin-bottom: 0.5em;
 }
 
 aside section h2 {
@@ -45,9 +46,10 @@ aside div {
 
 .option {
     display: block;
-    width: 100%;
     box-sizing: border-box;
-    border-radius: 2px;
+    width: 100%;
+    max-width: 3em;
+    border-radius: 4px;
     cursor: pointer;
     background-color: #999;
     border: 1px solid transparent;
@@ -79,7 +81,7 @@ main {
     flex-direction: column;
     justify-content: flex-end;
     border: 1px solid black;
-    border-radius: 2px;
+    border-radius: 4px;
     aspect-ratio: 4 / 3;
     min-width: 25%;
     flex: 1;
