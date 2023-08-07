@@ -8,52 +8,52 @@
     <body>
         <aside>
             <input id='search' type='text' placeholder='Search...' spellcheck='false' autocomplete='off'>
-            <section>
+            <section id='style'>
                 <h2>Style</h2>
-                <form >
-                    <label style="--icon: url('icons/3d.webp')"><input type="checkbox">3D</input></label>
-                    <label style="--icon: url('icons/2d.webp')"><input type="checkbox">2D</input></label>
-                </form>
+                <div>
+                    <img class='option' src='icons/3d.webp' title='3D' />
+                    <img class='option' src='icons/2d.webp' title='2D' />
+                </div>
             </section>
-            <section>
+            <section id='tier'>
                 <h2>Tier</h2>
-                <form>
-                    <label style="--icon: url('icons/tier/1.webp')"><input type="checkbox">1</input></label>
-                    <label style="--icon: url('icons/tier/2.webp')"><input type="checkbox">2</input></label>
-                    <label style="--icon: url('icons/tier/3.webp')"><input type="checkbox">3</input></label>
-                    <label style="--icon: url('icons/tier/4.webp')"><input type="checkbox">4</input></label>
-                    <label style="--icon: url('icons/tier/5.webp')"><input type="checkbox">5</input></label>
-                    <label style="--icon: url('icons/tier/6.webp')"><input type="checkbox">6</input></label>
-                    <label style="--icon: url('icons/tier/7.webp')"><input type="checkbox">7</input></label>
-                    <label style="--icon: url('icons/tier/8.webp')"><input type="checkbox">8</input></label>
-                    <label style="--icon: url('icons/tier/9.webp')"><input type="checkbox">9</input></label>
-                    <label style="--icon: url('icons/tier/10.webp')"><input type="checkbox">10</input></label>
-                </form>
+                <div>
+                    <img class='option' src='icons/tier/1.webp' title='1' />
+                    <img class='option' src='icons/tier/2.webp' title='2' />
+                    <img class='option' src='icons/tier/3.webp' title='3' />
+                    <img class='option' src='icons/tier/4.webp' title='4' />
+                    <img class='option' src='icons/tier/5.webp' title='5' />
+                    <img class='option' src='icons/tier/6.webp' title='6' />
+                    <img class='option' src='icons/tier/7.webp' title='7' />
+                    <img class='option' src='icons/tier/8.webp' title='8' />
+                    <img class='option' src='icons/tier/9.webp' title='9' />
+                    <img class='option' src='icons/tier/10.webp' title='10' />
+                </div>
             </section>
-            <section>
+            <section id='class'>
                 <h2>Class</h2>
-                <form>
-                    <label style="--icon: url('icons/class/lt.webp')"><input type="checkbox">LT</input></label>
-                    <label style="--icon: url('icons/class/mt.webp')"><input type="checkbox">MT</input></label>
-                    <label style="--icon: url('icons/class/ht.webp')"><input type="checkbox">HT</input></label>
-                    <label style="--icon: url('icons/class/td.webp')"><input type="checkbox">TD</input></label>
-                    <label style="--icon: url('icons/class/spg.webp')"><input type="checkbox">SPG</input></label>
-                </form>
+                <div>
+                    <img class='option' src='icons/class/lt.webp' title='LT' />
+                    <img class='option' src='icons/class/mt.webp' title='MT' />
+                    <img class='option' src='icons/class/ht.webp' title='HT' />
+                    <img class='option' src='icons/class/td.webp' title='TD' />
+                    <img class='option' src='icons/class/spg.webp' title='SPG' />
+                </div>
             </section>
-            <section>
+            <section id='nation'>
                 <h2>Nation</h2>
-                <form>
-                    <label style="--icon: url('icons/nation/us.webp')"><input type="checkbox">US</input></label>
-                    <label style="--icon: url('icons/nation/ru.webp')"><input type="checkbox">RU</input></label>
-                    <label style="--icon: url('icons/nation/gr.webp')"><input type="checkbox">GR</input></label>
-                    <label style="--icon: url('icons/nation/fr.webp')"><input type="checkbox">FR</input></label>
-                    <label style="--icon: url('icons/nation/it.webp')"><input type="checkbox">IT</input></label>
-                    <label style="--icon: url('icons/nation/cz.webp')"><input type="checkbox">CZ</input></label>
-                    <label style="--icon: url('icons/nation/jp.webp')"><input type="checkbox">JP</input></label>
-                    <label style="--icon: url('icons/nation/ch.webp')"><input type="checkbox">CH</input></label>
-                    <label style="--icon: url('icons/nation/po.webp')"><input type="checkbox">PO</input></label>
-                    <label style="--icon: url('icons/nation/sw.webp')"><input type="checkbox">SW</input></label>
-                </form>
+                <div>
+                    <img class='option' src='icons/nation/us.webp' title='US' />
+                    <img class='option' src='icons/nation/ru.webp' title='RU' />
+                    <img class='option' src='icons/nation/gr.webp' title='GR' />
+                    <img class='option' src='icons/nation/fr.webp' title='FR' />
+                    <img class='option' src='icons/nation/it.webp' title='IT' />
+                    <img class='option' src='icons/nation/cz.webp' title='CZ' />
+                    <img class='option' src='icons/nation/jp.webp' title='JP' />
+                    <img class='option' src='icons/nation/ch.webp' title='CH' />
+                    <img class='option' src='icons/nation/po.webp' title='PO' />
+                    <img class='option' src='icons/nation/sw.webp' title='SW' />
+                </div>
             </section>
             <section class='ad'>
                 your add here
@@ -63,7 +63,13 @@
             {{ with .Pages }}
                 {{ range sort . ".Date" "desc" }}
                 {{ $thumbnail := index .Params.images 0 }}
-                <a class='page' href="{{ .RelPermalink }}" style="background-image: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.5)), url({{$thumbnail}})">
+                <a class='page' href="{{ .RelPermalink }}" 
+                data-tank="{{ .Params.tank }}" 
+                data-style="{{ .Params.style }}"
+                data-tier="{{ .Params.tier }}"
+                data-class="{{ .Params.class }}"
+                data-nation="{{ .Params.nation }}"
+                style="background-image: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.5)), url({{$thumbnail}})">
                     <span>
                         <h1>{{ replace .File.BaseFileName "-" " " | title }}</h1>
                         <p>{{ .Params.Tank }} - {{ .Summary }}</p>
@@ -73,6 +79,64 @@
             {{ end }}
         </main>
 
-        <!-- <script src='/search.js'></script> -->
+        <script>
+
+            document.addEventListener('DOMContentLoaded', () => {
+
+                const pages = document.querySelectorAll('a.page');
+
+                // Maintains a set of all selected options for each category
+                let query = {
+                    'style': new Set(),
+                    'tier': new Set(),
+                    'class': new Set(),
+                    'nation': new Set()
+                };
+                document.querySelectorAll('.option').forEach(o => {
+                    o.addEventListener('click', e => {
+                        set = query[e.target.closest('section').id]
+                        if( set.has(e.target.title) ){
+                            set.delete(e.target.title);
+                            e.target.removeAttribute('checked');
+                        } else {
+                            set.add(e.target.title);
+                            e.target.setAttribute('checked', '');
+                        }
+                        updateFilter(pages, query);
+                    });
+                });
+
+                //console.log(query);
+                //const search = document.getElementById('search');
+                //search.addEventListener('input', updateFilter(pages));
+            })
+
+            /*
+            function clean(input){
+                return input.toLowerCase().trim().normalize('NFD');
+            }
+            */
+
+            function updateFilter(pages, query){
+                pages.forEach(page => {
+                    let condition = [];
+
+                    // Test each property of filter query category sets
+                    // TODO: this is spaghetti
+                    for(const key of Object.keys(query)){
+                        let terms = [...query[key]];
+                        // If category actually has a desired filter, append boolean
+                        // True if at least one term in category is found in page's data attribute
+                        if(terms.length > 0){
+                            condition.push( terms.some(term => page.getAttribute('data-' + key).includes(term.toUpperCase())) );
+                        }
+                    }
+
+                    // All categories that actually have a desired filter must match page to be displayed
+                    page.style.display = condition.every(b => b) ? 'inline-flex' : 'none';
+                });
+            }
+            
+        </script>
     </body>
 </html>

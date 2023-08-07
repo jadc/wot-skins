@@ -37,16 +37,16 @@ aside section h2 {
     margin: 0 0 .5em 0;
 }
 
-aside form {
+aside div {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     grid-gap: .5em;
 }
 
-aside form > label {
+.option {
     display: block;
+    width: 100%;
     box-sizing: border-box;
-    text-align: center;
     border-radius: 2px;
     cursor: pointer;
     background-color: #999;
@@ -54,29 +54,13 @@ aside form > label {
     transition: 100ms color, 100ms background-color, 100ms border cubic-bezier(.25,.8,.25,1);
 }
 
-aside form > label::before {
-    display: block;
-    content: "";
-    width: 100%;
-    aspect-ratio: 1/1;
-    background-image: var(--icon);
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-}
-
-/* hide checkbox icon */
-aside form > label > input {
-    display: none;
-}
-
-aside label:hover:has(:not(:checked)) {
+.option:hover {
     background-color: rgb(80,80,80);
     color: white;
     border: 1px solid white;
 }
 
-label:has(:checked) {
+.option[checked] {
     background-color: rgb(0,0,0);
     color: white;
     border: 1px solid white;
