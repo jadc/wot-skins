@@ -1,5 +1,6 @@
 ---
 date: 2023-08-06T19:27:26-06:00
+artist: "phil"
 # Style: "2d", "3d"
 style: "3D"
 tank: "bob"

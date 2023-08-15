@@ -1,5 +1,6 @@
 ---
 date: {{ .Date }}
+artist: ""
 # Style: "2D", "3D"
 style: "2D"
 tank: ""

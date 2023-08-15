@@ -1,5 +1,6 @@
 ---
 date: 2023-08-06T16:43:18-06:00
+artist: "chems"
 style: "3D"
 tank: "VK"
 tier: 1
