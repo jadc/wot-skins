@@ -3,7 +3,7 @@ article {
     width: 100%;
     flex-direction: column;
     justify-content: center;
-    margin: 0 5em;
+    margin: 0 15em;
 }
 
 header {
@@ -70,3 +70,11 @@ main {
 .slides::-webkit-scrollbar-track {
   background: transparent;
 }
+
+/* Mobile */
+@media only screen and (max-width: 900px) {
+  article {
+    margin: 0;
+  }
+}
+
