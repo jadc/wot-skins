@@ -8,14 +8,16 @@
     </head>
     <body>
         <aside>
-            <section>
-                <input type='search' id='search' placeholder='Search by skin name, artist, etc.' />
+            <section id='mainside'>
+                <img src='icon.webp' alt='chems' />
+                <input type='search' id='search' class='selectable' placeholder='Search by skin name, artist, etc.' />
             </section>
-            <section id='style'>
-                <h2>Style</h2>
+            <section id='category'>
+                <h2>Category</h2>
                 <div>
                     <img class='option selectable' src='icons/3d.webp' title='3D' />
                     <img class='option selectable' src='icons/2d.webp' title='2D' />
+                    <img class='option selectable' src='icons/mod.webp' title='MOD' />
                 </div>
             </section>
             <section id='tier'>
@@ -69,7 +71,7 @@
                 {{ $name := replace .File.BaseFileName "-" " " }}
                 <a class='page selectable' href="{{ .RelPermalink }}" 
                 data-tags="{{ $name | lower }} {{ .Params.artist | lower }} {{ .Params.tank | lower }}" 
-                data-style="{{ .Params.style }}"
+                data-category="{{ .Params.category }}"
                 data-tier="{{ .Params.tier }}"
                 data-class="{{ .Params.class }}"
                 data-nation="{{ .Params.nation }}"
@@ -92,7 +94,7 @@
                 // Maintains a set of all selected option for each category
                 let query = [];
                 let filter = {
-                    'style': new Set(),
+                    'category': new Set(),
                     'tier': new Set(),
                     'class': new Set(),
                     'nation': new Set()

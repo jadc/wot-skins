@@ -9,29 +9,33 @@
     <body>
         <article>
             <header>
-                <h1>{{ $SkinName }}</h1>
-                <h2>for the {{ .Params.tank }}</h2>
+                <div class="title">
+                    <a class='selectable' href='/'>Return</a>
+                    <h1>{{ $SkinName }}</h1>
+                    <h2>for the {{ .Params.tank }}</h2>
+                </div>
+                <div class="desc">
+                    <p>{{ .Content }}</p>
+                    {{ with .Params.fbx }}<a class='selectable' href='{{ . }}'>Download FBX</a>{{ end }}
+                    {{ with .Params.wotmod }}<a class='selectable' style='background-color: #301a81;' href='{{ . }}'>Download</a>{{ end }}
+                </div>
             </header>
             {{ with .Params.images }}
             <section>
-                <div class='slides'>
-                    {{ range $i, $el := . }}
-                    <img id='{{ $i }}' src='/{{ $el }}' />
-                    {{ end }}
-                </div>
                 <div class="thumbnails">
                     {{ range $i, $el := . }}
                     <a href='#{{ $i }}'>
-                        <img class='selectable' src='/{{ $el }}' alt='Slide {{ $i }}' />
+                        <img class='selectable' src='{{ $el }}' alt='Slide {{ $i }}' />
                     </a>
+                    {{ end }}
+                </div>
+                <div class='slides'>
+                    {{ range $i, $el := . }}
+                    <img id='{{ $i }}' src='{{ $el }}' />
                     {{ end }}
                 </div>
             </section>
             {{ end }}
-            <main>
-                {{ .Content }}
-                <a href='/'>Return</a>
-            </main>
         </article>
     </body>
 </html>

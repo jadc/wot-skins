@@ -3,30 +3,46 @@ article {
     width: 100%;
     flex-direction: column;
     justify-content: center;
-    margin: 0 15em;
+    margin: 0 24em;
 }
 
 header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     width: 100%;
-    text-align: center;
     color: white;
-    margin: 1em 0;
 }
 
-header h1 {
-    font-size: 400%;
+.title {
+  margin: 1em 0;
+  white-space: nowrap;
+}
+
+.title h1 {
+    font-size: 500%;
     font-weight: 900;
     margin: 0;
 }
 
-header h2 {
+.title h2 {
     font-size: 200%;
     font-weight: 600;
     margin: 0;
 }
 
-main {
-    background-color: rgb(127, 127, 127);
+.desc {
+  text-align: right;
+  margin: 1em 0;
+}
+
+header a {
+  text-decoration: none;
+  text-align: center;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  padding: .25em 1em;
+  border: 1px solid #301a81;
 }
 
 /* Carousel */
@@ -50,24 +66,18 @@ main {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    margin: .5em 0;
+    margin: 0;
 }
 
 .thumbnails img {
     max-width: 6em;
-    margin: 0 .5em;
+    margin: 0 .25em;
     border: 1px solid transparent;
     border-radius: 4px;
 }
 
-.slides::-webkit-scrollbar {
-  width: 10px;
-  height: 1px;
-}
-.slides::-webkit-scrollbar-thumb {
-  background: white;
-}
-.slides::-webkit-scrollbar-track {
+.slides::-webkit-scrollbar, .slides::-webkit-scrollbar-thumb, .slides::-webkit-scrollbar-track {
+  width: 0;
   background: transparent;
 }
 
@@ -75,6 +85,15 @@ main {
 @media only screen and (max-width: 900px) {
   article {
     margin: 0;
+  }
+  .title {
+    text-align: center;
+  }
+  .desc {
+    text-align: center;
+  }
+  header {
+    flex-direction: column;
   }
 }
 

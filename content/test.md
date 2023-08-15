@@ -2,7 +2,7 @@
 date: 2023-08-06T19:27:26-06:00
 artist: "phil"
 # Style: "2d", "3d"
-style: "3D"
+category: "MOD"
 tank: "bob"
 tier: 3
 # Class: "lt", "mt", "ht", "td", "spg"
