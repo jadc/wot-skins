@@ -9,7 +9,7 @@
     <body>
         <aside>
             <section>
-                <input type='search' id='search' />
+                <input type='search' id='search' placeholder='Search by skin name, artist, etc.' />
             </section>
             <section id='style'>
                 <h2>Style</h2>
@@ -107,8 +107,7 @@
                             set.add(e.target.title);
                             e.target.setAttribute('checked', '');
                         }
-                        updateFilter(pages, filter);
-                        doSearch(pages, query);
+                        updateFilter(pages, filter, query);
                     });
                 });
                 
@@ -116,12 +115,11 @@
                 const search = document.getElementById('search');
                 search.addEventListener('input', () => {
                     query = search.value.toLowerCase().trim().normalize('NFD').split(' ');
-                    updateFilter(pages, filter);
-                    doSearch(pages, query);
+                    updateFilter(pages, filter, query);
                 });
             });
 
-            function updateFilter(pages, filter){
+            function updateFilter(pages, filter, query){
                 pages.forEach(page => {
                     let condition = [];
 
@@ -136,15 +134,13 @@
                         }
                     }
 
+                    // Account for custom search query
+                    if(query && query.length > 0){
+                        condition.push( query.every(term => page.dataset.tags.includes(term)) )
+                    }
+
                     // All categories that actually have a desired filter must match page to be displayed
                     page.style.display = condition.every(b => b) ? 'inline-flex' : 'none';
-                });
-            }
-
-            function doSearch(pages, query){
-                pages.forEach(page => {
-                    console.log(page.dataset.tags);
-                    page.style.display = query.every(term => page.dataset.tags.includes(term)) ? 'inline-flex' : 'none';
                 });
             }
             

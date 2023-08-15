@@ -48,6 +48,12 @@ aside div {
     border: 1px solid white;
 }
 
+/* Search bar */
+#search {
+    width: 100%;
+    padding: 1em;
+}
+
 /* Skins */
 main {
     display: flex;
