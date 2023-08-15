@@ -8,6 +8,9 @@
     </head>
     <body>
         <aside>
+            <section>
+                <input type='search' id='search' />
+            </section>
             <section id='style'>
                 <h2>Style</h2>
                 <div>
@@ -63,15 +66,16 @@
             {{ with .Pages }}
                 {{ range sort . ".Date" "desc" }}
                 {{ $thumbnail := index .Params.images 0 }}
+                {{ $name := replace .File.BaseFileName "-" " " }}
                 <a class='page selectable' href="{{ .RelPermalink }}" 
-                data-tank="{{ .Params.tank }}" 
+                data-tags="{{ $name | lower }} {{ .Params.artist | lower }} {{ .Params.tank | lower }}" 
                 data-style="{{ .Params.style }}"
                 data-tier="{{ .Params.tier }}"
                 data-class="{{ .Params.class }}"
                 data-nation="{{ .Params.nation }}"
                 style="background-image: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.5)), url({{$thumbnail}})">
                     <span>
-                        <h1>{{ replace .File.BaseFileName "-" " " | title }}</h1>
+                        <h1>{{ $name | title }}</h1>
                         <p>{{ .Params.Tank }} - {{ .Summary }}</p>
                     </span>
                 </a>
@@ -86,7 +90,8 @@
                 const pages = document.querySelectorAll('a.page');
 
                 // Maintains a set of all selected option for each category
-                let query = {
+                let query = [];
+                let filter = {
                     'style': new Set(),
                     'tier': new Set(),
                     'class': new Set(),
@@ -94,7 +99,7 @@
                 };
                 document.querySelectorAll('.option').forEach(o => {
                     o.addEventListener('click', e => {
-                        set = query[e.target.closest('section').id]
+                        set = filter[e.target.closest('section').id]
                         if( set.has(e.target.title) ){
                             set.delete(e.target.title);
                             e.target.removeAttribute('checked');
@@ -102,19 +107,28 @@
                             set.add(e.target.title);
                             e.target.setAttribute('checked', '');
                         }
-                        updateFilter(pages, query);
+                        updateFilter(pages, filter);
+                        doSearch(pages, query);
                     });
+                });
+                
+                // Extract 'tags' from search and add to query
+                const search = document.getElementById('search');
+                search.addEventListener('input', () => {
+                    query = search.value.toLowerCase().trim().normalize('NFD').split(' ');
+                    updateFilter(pages, filter);
+                    doSearch(pages, query);
                 });
             });
 
-            function updateFilter(pages, query){
+            function updateFilter(pages, filter){
                 pages.forEach(page => {
                     let condition = [];
 
                     // Test each property of filter query category sets
                     // TODO: this is spaghetti
-                    for(const key of Object.keys(query)){
-                        let terms = [...query[key]];
+                    for(const key of Object.keys(filter)){
+                        let terms = [...filter[key]];
                         // If category actually has a desired filter, append boolean
                         // True if at least one term in category is found in page's data attribute
                         if(terms.length > 0){
@@ -124,6 +138,13 @@
 
                     // All categories that actually have a desired filter must match page to be displayed
                     page.style.display = condition.every(b => b) ? 'inline-flex' : 'none';
+                });
+            }
+
+            function doSearch(pages, query){
+                pages.forEach(page => {
+                    console.log(page.dataset.tags);
+                    page.style.display = query.every(term => page.dataset.tags.includes(term)) ? 'inline-flex' : 'none';
                 });
             }
             
