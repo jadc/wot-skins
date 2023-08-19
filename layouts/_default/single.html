@@ -3,20 +3,20 @@
     <head>
         {{ partial "header.html" . }}
         <link rel='stylesheet' type='text/css' href='/single.css'>
-        <title>{{ .Params.name }} - {{ .Params.tank }} Skin</title>
+        <title>{{ .Params.name }} &mdash; {{ .Params.tank }} Skin</title>
     </head>
     <body>
         <article>
             <header>
-                <div class="title">
-                    <a class='selectable' href='/'>Return</a>
+                <main>
+                    <a class='button selectable' href='/'>Return</a>
                     <h1>{{ .Params.name }}</h1>
                     <h2>for the {{ .Params.tank }}</h2>
-                </div>
-                <div class="desc">
                     <p>{{ .Content }}</p>
-                    {{ with .Params.fbx }}<a class='selectable' href='{{ . }}'>Download FBX</a>{{ end }}
-                    {{ with .Params.wotmod }}<a class='selectable' style='background-color: #301a81;' href='{{ . }}'>Download</a>{{ end }}
+                </main>
+                <div class="links">
+                    {{ with .Params.wotmod }}<a class='button selectable' style='background-color: #1d811a;' href='{{ . }}'>Download</a>{{ end }}
+                    {{ with .Params.fbx }}<a class='button selectable' href='{{ . }}'>Download FBX</a>{{ end }}
                 </div>
             </header>
             {{ with .Params.images }}
