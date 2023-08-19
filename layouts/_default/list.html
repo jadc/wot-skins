@@ -137,7 +137,7 @@
 
                     // Account for custom search query
                     if(query && query.length > 0){
-                        condition.push( query.every(term => page.dataset.tags.includes(term)) )
+                        condition.push( query.every(term => page.dataset.tags.normalize('NFD').replace(/[\u0300-\u036f]/g, "").includes(term)) )
                     }
 
                     // All categories that actually have a desired filter must match page to be displayed
