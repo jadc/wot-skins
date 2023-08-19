@@ -68,16 +68,15 @@
             {{ with .Pages }}
                 {{ range sort . ".Date" "desc" }}
                 {{ $thumbnail := index .Params.images 0 }}
-                {{ $name := replace .File.BaseFileName "-" " " }}
                 <a class='page selectable' href="{{ .RelPermalink }}" 
-                data-tags="{{ $name | lower }} {{ .Params.artist | lower }} {{ .Params.tank | lower }}" 
+                data-tags="{{ .Params.name | lower }} {{ .Params.artist | lower }} {{ .Params.tank | lower }}" 
                 data-category="{{ .Params.category }}"
                 data-tier="{{ .Params.tier }}"
                 data-class="{{ .Params.class }}"
                 data-nation="{{ .Params.nation }}"
                 style="background-image: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.5)), url({{$thumbnail}})">
                     <span>
-                        <h1>{{ $name | title }}</h1>
+                        <h1>{{ .Params.name }}</h1>
                         <p>{{ .Params.Tank }} - {{ .Summary }}</p>
                     </span>
                 </a>

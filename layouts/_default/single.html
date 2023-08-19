@@ -3,15 +3,14 @@
     <head>
         {{ partial "header.html" . }}
         <link rel='stylesheet' type='text/css' href='/single.css'>
-        {{ $SkinName := replace .File.BaseFileName "-" " " | upper }}
-        <title>{{ $SkinName }} - {{ .Params.tank }} Skin</title>
+        <title>{{ .Params.name }} - {{ .Params.tank }} Skin</title>
     </head>
     <body>
         <article>
             <header>
                 <div class="title">
                     <a class='selectable' href='/'>Return</a>
-                    <h1>{{ $SkinName }}</h1>
+                    <h1>{{ .Params.name }}</h1>
                     <h2>for the {{ .Params.tank }}</h2>
                 </div>
                 <div class="desc">
