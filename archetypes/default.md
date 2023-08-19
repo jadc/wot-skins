@@ -1,5 +1,4 @@
 ---
-date: {{ .Date }}
 name: ""
 artist: ""
 # Category: "2D", "3D", "MOD"

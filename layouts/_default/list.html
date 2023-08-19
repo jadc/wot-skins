@@ -66,7 +66,7 @@
         </aside>
         <main>
             {{ with .Pages }}
-                {{ range sort . ".Date" "desc" }}
+                {{ range sort . ".Lastmod" "desc" }}
                 {{ $thumbnail := index .Params.images 0 }}
                 <a class='page selectable' href="{{ .RelPermalink }}" 
                 data-tags="{{ .Params.name | lower }} {{ .Params.artist | lower }} {{ .Params.tank | lower }}" 
