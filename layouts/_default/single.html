@@ -4,6 +4,7 @@
         {{ partial "header.html" . }}
         <link rel='stylesheet' type='text/css' href='/single.css'>
         <title>{{ .Params.name }} &mdash; {{ .Params.tank }} Skin</title>
+        {{ with .Params.images }}<meta name='og:image' itemprop='image' content='{{ index . 0 }}'>{{ end }}
     </head>
     <body>
         <article>
