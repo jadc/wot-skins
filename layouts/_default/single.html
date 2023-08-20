@@ -13,11 +13,11 @@
                 <main>
                     <a class='button selectable' href='/'>Return</a>
                     <h1>{{ .Params.name }}</h1>
-                    <h2>for the {{ .Params.tank }}</h2>
+                    <h2>by {{ .Params.artist }}</h2>
                     <p>{{ .Content }}</p>
                 </main>
                 <div class="links">
-                    {{ with .Params.wotmod }}<a class='button selectable' style='background-color: #1d811a;' href='{{ . }}'>Download</a>{{ end }}
+                    {{ if isset .Params "wotmod" }}<a class='button selectable' style='background-color: #1d811a;' href='{{ .Params.wotmod }}'>Download {{ if isset .Params "category" }}{{ .Params.category | title }}{{ end }}</a>{{ end }}
                     {{ with .Params.fbx }}<a class='button selectable' href='{{ . }}'>Download FBX</a>{{ end }}
                 </div>
             </header>
