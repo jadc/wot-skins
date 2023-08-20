@@ -3,8 +3,10 @@
     <head>
         <link rel='stylesheet' type='text/css' href='/list.css'>
         {{ partial "header.html" . }}
-        <title>{{ if not .IsHome }}{{ .Title | title }} | {{ end }}{{ .Site.Title }}</title>
-        <meta content="{{ if not .IsHome }}{{ .Title | title }} | {{ end }}{{ .Site.Title }}" property="og:title" />
+
+        <title>{{ .Site.Title }}</title>
+        <meta property="og:title" content="{{ .Site.Title }}" />
+        <meta name="twitter:title" content="{{ .Site.Title }}">
     </head>
     <body>
         <aside>
