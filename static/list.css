@@ -3,6 +3,7 @@ aside {
     display: flex;
     flex-direction: column;
     flex-basis: 20em;
+    min-width: 20em;
     margin: 1em;
 }
 
@@ -59,7 +60,7 @@ aside div {
 
 #mainside > img {
     display: block;
-    max-width: 20em;
+    max-width: 12em;
     margin: auto;
 }
 
@@ -67,10 +68,11 @@ aside div {
 #search {
     width: 100%;
     margin: 1em 0;
-    padding: 1em;
+    padding: 1em 1em 1em 3em;
     border: 1px solid transparent;
     border-radius: 4px;
-    background-color: #1c1536;
+    background-color: #0d0723;
+    background: #0d0723 url('icons/search.svg') no-repeat 1em;
     color: white;
 }
 
