@@ -18,4 +18,4 @@ images: ["https://cdn.discordapp.com/attachments/1142580755973808298/11426063873
 wotmod: "https://cdn.discordapp.com/attachments/1142580801691721798/1142605934091321416/SkodaT56-WoT2.0.wotmod"
 fbx: ""
 ---
-The dynamic 3D style from chems' WoT 2.0 video. This skin is very primative looking.
+The dynamic 3D style from chems' WoT 2.0 video. This skin is very primitive looking.
