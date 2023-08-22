@@ -1,5 +1,4 @@
 ---
-date: {{ .Date }}
 name: "CoBRUH"
 artist: "chems"
 # Category: "2D", "3D", "MOD"

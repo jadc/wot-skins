@@ -1,5 +1,4 @@
 ---
-date: {{ .Date }}
 name: "LanIslam"
 artist: "chems"
 # Category: "2D", "3D", "MOD"

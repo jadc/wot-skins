@@ -1,5 +1,4 @@
 ---
-date: {{ .Date }}
 name: "MTF Nu-7 \"Hammer Down\""
 artist: "1stSavagerY"
 # Category: "2D", "3D", "MOD"

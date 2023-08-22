@@ -1,5 +1,4 @@
 ---
-date: {{ .Date }}
 name: "Floral Phase"
 artist: "1stSavagerY"
 # Category: "2D", "3D", "MOD"
