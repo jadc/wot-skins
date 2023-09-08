@@ -19,8 +19,8 @@
             <header>
                 <main>
                     <a class='button selectable' href='/'>Return</a>
-                    <h1>{{ .Params.name }}</h1>
-                    <h2>by {{ .Params.artist }}</h2>
+                    {{ with .Params.name }}<h1>{{ . }}</h1>{{ end }}
+                    {{ with .Params.artist }}<h2>by {{ . }}</h2>{{ end }}
                     <p>{{ .Content }}</p>
                 </main>
                 <div class="links">
