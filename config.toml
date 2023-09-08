@@ -1,10 +1,9 @@
 title = 'chems'
 languageCode = 'en-us'
-enableGitInfo = true
 disableKinds = ['taxonomy', 'term', 'tier', 'class', 'nation']
 
 [frontmatter]
-  lastmod = ['lastmod', ':git', ':fileModTime', ':default']
+  lastmod = [':fileModTime', ':default']
 
 [taxonomies]
   tier = 'tier'
