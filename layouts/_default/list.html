@@ -68,22 +68,20 @@
             </section>-->
         </aside>
         <main>
-            {{ with .Pages }}
-                {{ range sort . ".Lastmod" "desc" }}
-                {{ $thumbnail := index .Params.images 0 }}
-                <a class='page selectable' href="{{ .RelPermalink }}" 
-                data-tags="{{ .Params.name | lower }} {{ .Params.artist | lower }} {{ .Params.tank | lower }}" 
-                data-category="{{ .Params.category }}"
-                data-tier="{{ .Params.tier }}"
-                data-class="{{ .Params.class }}"
-                data-nation="{{ .Params.nation }}"
-                style="background-image: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.5)), url({{$thumbnail}})">
-                    <span>
-                        <h1>{{ .Params.name }}</h1>
-                        <p>{{ .Params.Tank }} - {{ .Summary }}</p>
-                    </span>
-                </a>
-                {{ end }}
+            {{ range .Pages }}
+            {{ $thumbnail := index .Params.images 0 }}
+            <a class='page selectable' href="{{ .RelPermalink }}" 
+            data-tags="{{ .Params.name | lower }} {{ .Params.artist | lower }} {{ .Params.tank | lower }}" 
+            data-category="{{ .Params.category }}"
+            data-tier="{{ .Params.tier }}"
+            data-class="{{ .Params.class }}"
+            data-nation="{{ .Params.nation }}"
+            style="background-image: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.5)), url({{$thumbnail}})">
+                <span>
+                    <h1>{{ .Params.name }}</h1>
+                    <p>{{ with .Params.tank }}{{ . }} - {{ end }}{{ .Summary }}</p>
+                </span>
+            </a>
             {{ end }}
         </main>
 
