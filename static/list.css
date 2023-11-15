@@ -67,7 +67,7 @@ aside div {
 /* Search bar */
 #search {
     width: 100%;
-    margin: 1em 0;
+    margin-bottom: 1em;
     padding: 1em 1em 1em 3em;
     border: 1px solid transparent;
     border-radius: 4px;
