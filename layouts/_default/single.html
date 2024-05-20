@@ -1,49 +1,40 @@
-<!DOCTYPE html>
-<html lang="{{ .Site.Language }}">
-    <head>
-        {{ partial "header.html" . }}
-        <link rel='stylesheet' type='text/css' href='/single.css'>
-        <meta property="og:title" content="{{ .Params.name }} &mdash; {{ .Params.tank }} Skin">
-        <title>{{ .Params.name }} &mdash; {{ .Params.tank }} Skin</title>
-        {{ with .Params.images }}
-        <meta name="og:image" itemprop="image" content="{{ index . 0 }}">
-        <meta property="og:image:type" content="image/png">
-        <meta property="og:image:width" content="1200">
-        <meta property="og:image:height" content="630">
-        <meta name="twitter:card" content="summary_large_image">
-        <meta name="twitter:image:src" content="{{ index . 0 }}">
-        {{ end }}
-    </head>
-    <body>
-        <article>
-            <header>
-                <main>
-                    <a class='button selectable' href='/'>Return</a>
-                    {{ with .Params.name }}<h1>{{ . }}</h1>{{ end }}
-                    {{ with .Params.artist }}<h2>by {{ . }}</h2>{{ end }}
-                    <p>{{ .Content }}</p>
-                </main>
-                <div class="links">
-                    {{ if isset .Params "wotmod" }}<a class='button selectable' style='background-color: #1d811a;' href='{{ .Params.wotmod }}'>Download {{ if isset .Params "category" }}{{ .Params.category | title }}{{ end }}</a>{{ end }}
-                    {{ with .Params.fbx }}<a class='button selectable' href='{{ . }}'>Download FBX</a>{{ end }}
-                </div>
-            </header>
-            {{ with .Params.images }}
-            <section>
-                <div class="thumbnails">
-                    {{ range $i, $el := . }}
-                    <a href='#{{ $i }}'>
-                        <img class='selectable' src='{{ $el }}' alt='Slide {{ $i }}' />
+{{ define "head" }}
+    <link rel="stylesheet" type="text/css" href="/single.css">
+{{ end }}
+
+{{ define "body" }}
+    <article>
+        <header>
+            <main>
+                <a class="button selectable" href="/">Return</a>
+                {{ with .Params.name }}<h1>{{ . }}</h1>{{ end }}
+                {{ with .Params.artist }}<h2>by {{ . }}</h2>{{ end }}
+                <p>{{ .Content }}</p>
+            </main>
+            <div class="links">
+                {{ $category := "" }}
+
+                <a class="button selectable" style="background-color: #1d811a;" href="{{ with .Resources.Match "*.wotmod" }}{{ index . 0 }}{{ end }}">
+                        Download{{ if isset .Params "category" }} {{ .Params.category | title }}{{ end }}
                     </a>
-                    {{ end }}
-                </div>
-                <div class='slides'>
-                    {{ range $i, $el := . }}
-                    <img id='{{ $i }}' src='{{ $el }}' />
-                    {{ end }}
-                </div>
-            </section>
-            {{ end }}
-        </article>
-    </body>
-</html>
+                {{ with .Resources.Match "*.fbx" }}<a class="button selectable" href="{{ index . 0 }}">Download FBX</a>{{ end }}
+            </div>
+        </header>
+        {{ with .Resources.ByType "image"}}
+        <section>
+            <div class="thumbnails">
+                {{ range $i, $el := . }}
+                <a href="#{{ $i }}">
+                    <img class="selectable" src="{{ $el }}" alt="Slide {{ $i }}" />
+                </a>
+                {{ end }}
+            </div>
+            <div class="slides">
+                {{ range $i, $el := . }}
+                <img id="{{ $i }}" src="{{ $el }}" />
+                {{ end }}
+            </div>
+        </section>
+        {{ end }}
+    </article>
+{{ end }}

@@ -1,150 +1,84 @@
-<!DOCTYPE html>
-<html lang="{{ .Site.Language }}">
-    <head>
-        <link rel='stylesheet' type='text/css' href='/list.css'>
-        {{ partial "header.html" . }}
+{{ define "head" }}
+    <link rel="stylesheet" type="text/css" href="/list.css">
+{{ end }}
 
-        <title>{{ .Site.Title }}</title>
-        <meta property="og:title" content="{{ .Site.Title }}" />
-        <meta name="twitter:title" content="{{ .Site.Title }}">
-    </head>
-    <body>
-        <aside>
-            <section id='mainside'>
-                <input type='search' id='search' class='selectable' placeholder='Search by skin name, artist, etc.' />
-            </section>
-            <section id='category'>
-                <h2>Category</h2>
-                <div>
-                    <img class='option selectable' src='icons/3d.webp' title='3D' />
-                    <img class='option selectable' src='icons/2d.webp' title='2D' />
-                    <img class='option selectable' src='icons/mod.webp' title='MOD' />
-                </div>
-            </section>
-            <section id='tier'>
-                <h2>Tier</h2>
-                <div>
-                    <img class='option selectable' src='icons/tier/1.webp' title='1' />
-                    <img class='option selectable' src='icons/tier/2.webp' title='2' />
-                    <img class='option selectable' src='icons/tier/3.webp' title='3' />
-                    <img class='option selectable' src='icons/tier/4.webp' title='4' />
-                    <img class='option selectable' src='icons/tier/5.webp' title='5' />
-                    <img class='option selectable' src='icons/tier/6.webp' title='6' />
-                    <img class='option selectable' src='icons/tier/7.webp' title='7' />
-                    <img class='option selectable' src='icons/tier/8.webp' title='8' />
-                    <img class='option selectable' src='icons/tier/9.webp' title='9' />
-                    <img class='option selectable' src='icons/tier/10.webp' title='10' />
-                </div>
-            </section>
-            <section id='class'>
-                <h2>Class</h2>
-                <div>
-                    <img class='option selectable' src='icons/class/lt.webp' title='LT' />
-                    <img class='option selectable' src='icons/class/mt.webp' title='MT' />
-                    <img class='option selectable' src='icons/class/ht.webp' title='HT' />
-                    <img class='option selectable' src='icons/class/td.webp' title='TD' />
-                    <img class='option selectable' src='icons/class/spg.webp' title='SPG' />
-                </div>
-            </section>
-            <section id='nation'>
-                <h2>Nation</h2>
-                <div>
-                    <img class='option selectable' src='icons/nation/us.webp' title='US' />
-                    <img class='option selectable' src='icons/nation/br.webp' title='BR' />
-                    <img class='option selectable' src='icons/nation/ru.webp' title='RU' />
-                    <img class='option selectable' src='icons/nation/gr.webp' title='GR' />
-                    <img class='option selectable' src='icons/nation/fr.webp' title='FR' />
-                    <img class='option selectable' src='icons/nation/it.webp' title='IT' />
-                    <img class='option selectable' src='icons/nation/cz.webp' title='CZ' />
-                    <img class='option selectable' src='icons/nation/jp.webp' title='JP' />
-                    <img class='option selectable' src='icons/nation/ch.webp' title='CH' />
-                    <img class='option selectable' src='icons/nation/po.webp' title='PO' />
-                    <img class='option selectable' src='icons/nation/sw.webp' title='SW' />
-                </div>
-            </section>
-            <!--<section class='ad'>
-                your add here
-            </section>-->
-        </aside>
-        <main>
-            {{ range .Pages }}
-            {{ $thumbnail := index .Params.images 0 }}
-            <a class='page selectable' href="{{ .RelPermalink }}" 
+{{ define "body" }}
+    <aside>
+        <section id="mainside">
+            <input type="search" id="search" class="selectable" placeholder="Search by skin name, artist, etc." />
+        </section>
+        <section id="category">
+            <h2>Category</h2>
+            <div>
+                <img class="option selectable" src="icons/3d.webp" title="3D" />
+                <img class="option selectable" src="icons/2d.webp" title="2D" />
+                <img class="option selectable" src="icons/mod.webp" title="MOD" />
+            </div>
+        </section>
+        <section id="tier">
+            <h2>Tier</h2>
+            <div>
+                <img class="option selectable" src="icons/tier/1.webp" title="1" />
+                <img class="option selectable" src="icons/tier/2.webp" title="2" />
+                <img class="option selectable" src="icons/tier/3.webp" title="3" />
+                <img class="option selectable" src="icons/tier/4.webp" title="4" />
+                <img class="option selectable" src="icons/tier/5.webp" title="5" />
+                <img class="option selectable" src="icons/tier/6.webp" title="6" />
+                <img class="option selectable" src="icons/tier/7.webp" title="7" />
+                <img class="option selectable" src="icons/tier/8.webp" title="8" />
+                <img class="option selectable" src="icons/tier/9.webp" title="9" />
+                <img class="option selectable" src="icons/tier/10.webp" title="10" />
+            </div>
+        </section>
+        <section id="class">
+            <h2>Class</h2>
+            <div>
+                <img class="option selectable" src="icons/class/lt.webp" title="LT" />
+                <img class="option selectable" src="icons/class/mt.webp" title="MT" />
+                <img class="option selectable" src="icons/class/ht.webp" title="HT" />
+                <img class="option selectable" src="icons/class/td.webp" title="TD" />
+                <img class="option selectable" src="icons/class/spg.webp" title="SPG" />
+            </div>
+        </section>
+        <section id="nation">
+            <h2>Nation</h2>
+            <div>
+                <img class="option selectable" src="icons/nation/us.webp" title="US" />
+                <img class="option selectable" src="icons/nation/br.webp" title="BR" />
+                <img class="option selectable" src="icons/nation/ru.webp" title="RU" />
+                <img class="option selectable" src="icons/nation/gr.webp" title="GR" />
+                <img class="option selectable" src="icons/nation/fr.webp" title="FR" />
+                <img class="option selectable" src="icons/nation/it.webp" title="IT" />
+                <img class="option selectable" src="icons/nation/cz.webp" title="CZ" />
+                <img class="option selectable" src="icons/nation/jp.webp" title="JP" />
+                <img class="option selectable" src="icons/nation/ch.webp" title="CH" />
+                <img class="option selectable" src="icons/nation/po.webp" title="PO" />
+                <img class="option selectable" src="icons/nation/sw.webp" title="SW" />
+            </div>
+        </section>
+        <!--<section class="ad">
+            your add here
+        </section>-->
+    </aside>
+    <main>
+        {{ range .Pages }}
+            <a class="page selectable" href="{{ .RelPermalink }}" 
             data-tags="{{ .Params.name | lower }} {{ .Params.artist | lower }} {{ .Params.tank | lower }}" 
             data-category="{{ .Params.category }}"
             data-tier="{{ .Params.tier }}"
             data-class="{{ .Params.class }}"
             data-nation="{{ .Params.nation }}"
-            style="background-image: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.5)), url({{$thumbnail}})">
+            {{ with .Resources.ByType "image" }}
+                style="background-image: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.5)), url({{ (index . 0).RelPermalink }})"
+            {{ end }}
+            >
                 <span>
                     <h1>{{ .Params.name }}</h1>
                     <p>{{ with .Params.tank }}{{ . }} - {{ end }}{{ .Summary }}</p>
                 </span>
             </a>
-            {{ end }}
-        </main>
+        {{ end }}
+    </main>
 
-        <script>
-
-            document.addEventListener('DOMContentLoaded', () => {
-
-                const pages = document.querySelectorAll('a.page');
-
-                // Maintains a set of all selected option for each category
-                let query = [];
-                let filter = {
-                    'category': new Set(),
-                    'tier': new Set(),
-                    'class': new Set(),
-                    'nation': new Set()
-                };
-                document.querySelectorAll('.option').forEach(o => {
-                    o.addEventListener('click', e => {
-                        set = filter[e.target.closest('section').id]
-                        if( set.has(e.target.title) ){
-                            set.delete(e.target.title);
-                            e.target.removeAttribute('checked');
-                        } else {
-                            set.add(e.target.title);
-                            e.target.setAttribute('checked', '');
-                        }
-                        updateFilter(pages, filter, query);
-                    });
-                });
-                
-                // Extract 'tags' from search and add to query
-                const search = document.getElementById('search');
-                search.addEventListener('input', () => {
-                    query = search.value.toLowerCase().trim().normalize('NFD').replace(/[\u0300-\u036f]/g, "").split(' ');
-                    updateFilter(pages, filter, query);
-                });
-            });
-
-            function updateFilter(pages, filter, query){
-                pages.forEach(page => {
-                    let condition = [];
-
-                    // Test each property of filter query category sets
-                    // TODO: this is spaghetti
-                    for(const key of Object.keys(filter)){
-                        let terms = [...filter[key]];
-                        // If category actually has a desired filter, append boolean
-                        // True if at least one term in category is found in page's data attribute
-                        if(terms.length > 0){
-                            condition.push( terms.some(term => page.getAttribute('data-' + key).includes(term.toUpperCase())) );
-                        }
-                    }
-
-                    // Account for custom search query
-                    if(query && query.length > 0){
-                        condition.push( query.every(term => page.dataset.tags.normalize('NFD').replace(/[\u0300-\u036f]/g, "").includes(term)) )
-                    }
-
-                    // All categories that actually have a desired filter must match page to be displayed
-                    page.style.display = condition.every(b => b) ? 'inline-flex' : 'none';
-                });
-            }
-            
-        </script>
-    </body>
-</html>
+    <script src="/search.js" defer></script>
+{{ end }}
