@@ -1,0 +1,21 @@
+{{ with .Resources.ByType "image"}}
+    <div class="slideshow">
+        <div class="controls">
+            <a href="#prev">&#129144;</a>
+            {{ range $index, $url := . }}
+                {{ if eq $index 0 }}
+                    <a href="#{{ $index }}" class="slider" data-active></a>
+                {{ else }}
+                    <a href="#{{ $index }}" class="slider"></a>
+                {{ end }}
+            {{ end }}
+            <a href="#next">&#129146;</a>
+        </div>
+        <div class="view" data-current="0">
+            {{ range $index, $url := . }}
+                <img id="slide-{{ $index }}" src="{{ .RelPermalink }}" alt="{{ .Title }}">
+            {{ end }}
+        </div>
+    </div>
+{{ end }}
+

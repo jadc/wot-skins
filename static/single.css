@@ -49,14 +49,18 @@ main p > a {
 }
 
 /* Carousel */
-.slides {
+.view {
     display: flex;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
     scroll-behavior: smooth;
     -webkit-overflow-scrolling: touch;
+    overscroll-behavior-x: contain;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    border-radius: 4px;
 }
-.slides > img {
+.view > img {
     scroll-snap-align: start;
     flex-shrink: 0;
     aspect-ratio: 16 / 9;
@@ -65,21 +69,43 @@ main p > a {
     transition: transform 0.5s cubic-bezier(.25,.8,.25,1);
 }
 
-.thumbnails {
+.controls {
     display: flex;
-    flex-wrap: wrap;
     justify-content: center;
-    margin: 1em;
+    align-items: center;
+    margin: 1em 0;
 }
 
-.thumbnails img {
-    max-width: 6em;
-    margin: 0 .25em;
-    border: 1px solid transparent;
-    border-radius: 4px;
+.controls a {
+    width: 1em;
+    height: 1em;
+    text-align: center;
+    line-height: 1em;
+    padding: 0.15em;
+    margin: 0 0.15em;
+
+    text-decoration: none;
+    cursor: pointer;
 }
 
-.slides::-webkit-scrollbar, .slides::-webkit-scrollbar-thumb, .slides::-webkit-scrollbar-track {
+.controls a.slider {
+    width: 0.5em;
+    height: 0.5em;
+    line-height: 0.5em;
+
+    background-color: transparent;
+    color: white;
+    border: 0.1em solid white;
+    border-radius: 50%;
+}
+
+.controls a.slider[data-active] {
+    border: 0.1em solid transparent;
+    background-color: white;
+    transition: background-color 0.5s, border 0.5s;
+}
+
+.view::-webkit-scrollbar, .view::-webkit-scrollbar-thumb, .view::-webkit-scrollbar-track {
   width: 0;
   background: transparent;
 }

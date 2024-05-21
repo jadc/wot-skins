@@ -20,21 +20,11 @@
                 {{ with .Resources.Match "*.fbx" }}<a class="button selectable" href="{{ index . 0 }}">Download FBX</a>{{ end }}
             </div>
         </header>
-        {{ with .Resources.ByType "image"}}
-        <section>
-            <div class="thumbnails">
-                {{ range $i, $el := . }}
-                <a href="#{{ $i }}">
-                    <img class="selectable" src="{{ $el }}" alt="Slide {{ $i }}" />
-                </a>
-                {{ end }}
-            </div>
-            <div class="slides">
-                {{ range $i, $el := . }}
-                <img id="{{ $i }}" src="{{ $el }}" />
-                {{ end }}
-            </div>
-        </section>
-        {{ end }}
+        {{ partial "slideshow.html" . }}
+        <footer>
+            <p>Uploaded on {{ .Date.Format "January 2, 2006" }}</p>
+        </footer>
     </article>
+
+    <script src="/slideshow.js" defer></script>
 {{ end }}
