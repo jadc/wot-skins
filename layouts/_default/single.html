@@ -9,15 +9,15 @@
                 <a class="button selectable" href="/">Return</a>
                 {{ with .Params.name }}<h1>{{ . }}</h1>{{ end }}
                 {{ with .Params.artist }}<h2>by {{ . }}</h2>{{ end }}
+                {{ with .Params.category }}<h3>{{ . }}</h3>{{ end }}
                 <p>{{ .Content }}</p>
             </main>
             <div class="links">
                 {{ $category := "" }}
 
-                <a class="button selectable" style="background-color: #1d811a;" href="{{ with .Resources.Match "*.wotmod" }}{{ index . 0 }}{{ end }}">
-                        Download{{ if isset .Params "category" }} {{ .Params.category | title }}{{ end }}
-                    </a>
+                {{ with .Resources.Match "*.wotmod" }}<a class="button selectable" style="background-color: #1d811a;" href="{{ index . 0 }}">Download</a>{{ end }}
                 {{ with .Resources.Match "*.fbx" }}<a class="button selectable" href="{{ index . 0 }}">Download FBX</a>{{ end }}
+                {{ with .Resources.Match "*.zip" }}<a class="button selectable" href="{{ index . 0 }}">Download ZIP</a>{{ end }}
             </div>
         </header>
         {{ partial "slideshow.html" . }}

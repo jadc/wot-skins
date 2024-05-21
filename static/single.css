@@ -31,6 +31,12 @@ main h2 {
     margin: 0;
 }
 
+main h3 {
+    font-size: 100%;
+    font-weight: 600;
+    margin: 0;
+}
+
 main p > a {
     text-decoration: underline;
 }
