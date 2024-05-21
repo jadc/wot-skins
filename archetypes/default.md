@@ -9,9 +9,5 @@ tier: 1
 class: ""
 # Nation: "US", "RU", "GR", "FR", "IT", "CZ", "JP", "CH", "PO", "SW"
 nation: ""
-# Optional details
-images: []
-wotmod: ""
-fbx: ""
 ---
 Write your description here.
