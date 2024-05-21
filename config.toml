@@ -1,8 +1,8 @@
-title = 'chems'
-languageCode = 'en-us'
-disableKinds = ['taxonomy', 'term', 'tier', 'class', 'nation']
+title = "chems"
+languageCode = "en-us"
+disableKinds = ["taxonomy", "term"]
 
 [taxonomies]
-  tier = 'tier'
-  class = 'class'
-  nation = 'nation'
+  tier = "tier"
+  class = "class"
+  nation = "nation"
