@@ -29,7 +29,7 @@ document.querySelectorAll(".slideshow").forEach(s => {
             // Scroll to the target slide
             view.scrollTo({ 
                 behavior: "smooth",
-                left: view.querySelector(`#slide-${target}`).offsetLeft,
+                left: view.querySelector(`#slide-${target}`).offsetLeft - view.offsetLeft,
             });
         });
     });
