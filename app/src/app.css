@@ -1,1 +1,14 @@
 @import "tailwindcss";
+
+* {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+}
+
+body {
+    background-attachment: fixed;
+    background-color: rgb(20, 11, 53);
+    background-image: url("back.webp");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
