@@ -57,12 +57,31 @@
 		debounceTimer = setTimeout(fetchFiltered, 300);
 	}
 
-	function toggle<T>(set: Set<T>, value: T) {
-		if (set.has(value)) {
-			set.delete(value);
-		} else {
-			set.add(value);
-		}
+	function toggleCategory(value: Category) {
+		const next = new Set(categories);
+		next.has(value) ? next.delete(value) : next.add(value);
+		categories = next;
+		fetchFiltered();
+	}
+
+	function toggleTier(value: Tier) {
+		const next = new Set(tiers);
+		next.has(value) ? next.delete(value) : next.add(value);
+		tiers = next;
+		fetchFiltered();
+	}
+
+	function toggleClass(value: TankClass) {
+		const next = new Set(classes);
+		next.has(value) ? next.delete(value) : next.add(value);
+		classes = next;
+		fetchFiltered();
+	}
+
+	function toggleNation(value: Nation) {
+		const next = new Set(nations);
+		next.has(value) ? next.delete(value) : next.add(value);
+		nations = next;
 		fetchFiltered();
 	}
 
@@ -87,10 +106,10 @@
 		{tiers}
 		{classes}
 		{nations}
-		ontogglecategory={(c) => toggle(categories, c)}
-		ontoggletier={(t) => toggle(tiers, t)}
-		ontoggleclass={(c) => toggle(classes, c)}
-		ontogglenation={(n) => toggle(nations, n)}
+		ontogglecategory={toggleCategory}
+		ontoggletier={toggleTier}
+		ontoggleclass={toggleClass}
+		ontogglenation={toggleNation}
 	/>
 	<main class="flex flex-wrap justify-between">
 		{#each skins as skin (skin.slug)}
