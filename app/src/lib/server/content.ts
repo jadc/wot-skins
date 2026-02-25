@@ -4,7 +4,11 @@ import type { SkinData } from "$lib/types";
 
 const CONTENT_DIR = "static/content";
 
+let cachedSkins: SkinData[] | null = null;
+
 export async function getAllSkins(): Promise<SkinData[]> {
+	if (cachedSkins) return cachedSkins;
+
 	const entries = await readdir(CONTENT_DIR, { withFileTypes: true });
 	const skins: SkinData[] = [];
 
@@ -22,6 +26,7 @@ export async function getAllSkins(): Promise<SkinData[]> {
 		return db.localeCompare(da);
 	});
 
+	cachedSkins = skins;
 	return skins;
 }
 
