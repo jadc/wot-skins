@@ -6,7 +6,7 @@
 	let { data } = $props();
 
 	// svelte-ignore state_referenced_locally
-	const { initialFilters, skins: initialSkins } = data;
+	const { initialFilters, skins: initialSkins, hasMore: initialHasMore } = data;
 
 	let search = $state(initialFilters.search);
 	let categories = $state(new Set<Category>(initialFilters.categories));
@@ -14,12 +14,16 @@
 	let classes = $state(new Set<TankClass>(initialFilters.classes));
 	let nations = $state(new Set<Nation>(initialFilters.nations));
 	let skins: SkinData[] = $state(initialSkins);
+	let hasMore = $state(initialHasMore);
+	let page = $state(1);
+	let loading = $state(false);
 
 	let mounted = false;
 	let abortController: AbortController | null = null;
 	let debounceTimer: ReturnType<typeof setTimeout> | null = null;
+	let sentinel: HTMLElement;
 
-	function buildQueryString(): string {
+	function buildFilterQuery(): string {
 		const params = new URLSearchParams();
 		if (search.trim()) params.set("search", search.trim());
 		if (categories.size > 0) params.set("categories", [...categories].join(","));
@@ -29,32 +33,54 @@
 		return params.toString();
 	}
 
-	async function fetchFiltered() {
-		if (!mounted) return;
-
+	async function fetchPage(p: number, append: boolean) {
 		abortController?.abort();
 		abortController = new AbortController();
 
-		const qs = buildQueryString();
-		const url = qs ? `/?${qs}` : "/";
-		history.replaceState(history.state, "", url);
+		const filterQs = buildFilterQuery();
+		const params = filterQs ? `${filterQs}&page=${p}` : `page=${p}`;
 
+		if (!append) {
+			const url = filterQs ? `/?${filterQs}` : "/";
+			history.replaceState(history.state, "", url);
+		}
+
+		loading = true;
 		try {
-			const res = await fetch(`/api/skins${qs ? `?${qs}` : ""}`, {
+			const res = await fetch(`/api/skins?${params}`, {
 				signal: abortController.signal,
 			});
 			if (res.ok) {
-				skins = await res.json();
+				const result: { skins: SkinData[]; hasMore: boolean } = await res.json();
+				if (append) {
+					skins = [...skins, ...result.skins.slice(skins.length)];
+				} else {
+					skins = result.skins;
+				}
+				hasMore = result.hasMore;
+				page = p;
 			}
 		} catch (e) {
 			if (e instanceof DOMException && e.name === "AbortError") return;
 			throw e;
+		} finally {
+			loading = false;
 		}
+	}
+
+	async function fetchFiltered() {
+		if (!mounted) return;
+		await fetchPage(1, false);
 	}
 
 	function fetchFilteredDebounced() {
 		if (debounceTimer) clearTimeout(debounceTimer);
 		debounceTimer = setTimeout(fetchFiltered, 300);
+	}
+
+	async function loadMore() {
+		if (loading || !hasMore) return;
+		await fetchPage(page + 1, true);
 	}
 
 	function toggleCategory(value: Category) {
@@ -86,15 +112,24 @@
 	}
 
 	$effect(() => {
-		// Track search reactively for debounced fetch
 		search;
 		fetchFilteredDebounced();
 	});
 
 	$effect(() => {
 		mounted = true;
+
+		const observer = new IntersectionObserver(
+			(entries) => {
+				if (entries[0].isIntersecting) loadMore();
+			},
+			{ rootMargin: "200px" },
+		);
+		observer.observe(sentinel);
+
 		return () => {
 			mounted = false;
+			observer.disconnect();
 		};
 	});
 </script>
@@ -115,5 +150,6 @@
 		{#each skins as skin (skin.slug)}
 			<SkinCard {skin} />
 		{/each}
+		<div bind:this={sentinel}></div>
 	</main>
 </div>

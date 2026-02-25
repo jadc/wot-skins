@@ -11,6 +11,8 @@ import {
 	type FilterState,
 } from "$lib/types";
 
+export const PAGE_SIZE = 3 * 6;
+
 export function parseFilterParams(url: URL): FilterState {
 	const search = url.searchParams.get("search") ?? "";
 
@@ -79,4 +81,20 @@ export function filterSkins(skins: SkinData[], state: FilterState): SkinData[] {
 
 		return true;
 	});
+}
+
+export function parsePage(url: URL): number {
+	const raw = Number(url.searchParams.get("page"));
+	return Number.isInteger(raw) && raw >= 1 ? raw : 1;
+}
+
+export function paginateSkins(
+	skins: SkinData[],
+	page: number,
+): { skins: SkinData[]; hasMore: boolean } {
+	const end = page * PAGE_SIZE;
+	return {
+		skins: skins.slice(0, end),
+		hasMore: end < skins.length,
+	};
 }
