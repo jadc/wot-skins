@@ -25,11 +25,11 @@
 
 	function buildFilterQuery(): string {
 		const params = new SvelteURLSearchParams();
-		if (search.trim()) params.set("search", search.trim());
+		if (search.trim())       params.set("search", search.trim());
 		if (categories.size > 0) params.set("categories", [...categories].join(","));
-		if (tiers.size > 0) params.set("tiers", [...tiers].join(","));
-		if (classes.size > 0) params.set("classes", [...classes].join(","));
-		if (nations.size > 0) params.set("nations", [...nations].join(","));
+		if (tiers.size > 0)      params.set("tiers", [...tiers].join(","));
+		if (classes.size > 0)    params.set("classes", [...classes].join(","));
+		if (nations.size > 0)    params.set("nations", [...nations].join(","));
 		return params.toString();
 	}
 
@@ -78,7 +78,6 @@
 <svelte:head>
 	<link rel="icon" href="/icons/search.svg" />
 
-	<!-- OG / Discord -->
 	<meta property="og:site_name" content="chems" />
 	<meta content="#2F3136" name="theme-color" />
 	<meta property="og:type" content="website" />
@@ -102,7 +101,7 @@
 		ontoggleclass={toggleClass}
 		ontogglenation={toggleNation}
 	/>
-	<main class="min-h-screen flex-1">
+	<main class="flex-1">
 		{@render children()}
 	</main>
 </div>

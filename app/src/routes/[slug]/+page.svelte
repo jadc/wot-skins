@@ -1,9 +1,16 @@
 <script lang="ts">
+	import { afterNavigate } from "$app/navigation";
 	import { resolve } from "$app/paths";
 	import { page } from "$app/state";
 	import Slideshow from "$lib/components/Slideshow.svelte";
 
 	let { data } = $props();
+	let article: HTMLElement;
+
+    // Mostly for mobile, scroll to article (past the sidebar) on page load
+	afterNavigate(() => {
+		article?.scrollIntoView();
+	});
 
 	let title = $derived(data.skin.name ?? data.skin.slug);
 	let description = $derived(
@@ -38,19 +45,19 @@
 	{/if}
 </svelte:head>
 
-<article class="flex flex-col gap-4 text-white">
-	<div>
+<article bind:this={article} class="flex h-[calc(100dvh-2em)] flex-col gap-4 text-white scroll-mt-[1em]">
+	<div class="shrink-0">
 		<a
 			href={resolve("/")}
-			class="selectable inline-flex items-center gap-2 rounded border border-transparent bg-black/30 px-4 py-2 text-white no-underline"
+			class="selectable inline-flex items-center gap-2 rounded border border-transparent bg-surface px-4 py-2 text-white no-underline"
 		>
 			<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="shrink-0 opacity-60"><polyline points="15 18 9 12 15 6"></polyline></svg>
 			Return
 		</a>
 	</div>
 
-	<div class="flex gap-4 max-lg:flex-col">
-		<div class="min-w-0 flex-1 rounded-lg bg-black/30 p-4">
+	<div class="shrink-0 flex gap-4 max-lg:flex-col">
+		<div class="min-w-0 flex-1 rounded-lg bg-surface p-4">
 			{#if data.skin.name}
 				<h1 class="m-0 text-4xl leading-none font-black">{data.skin.name}</h1>
 			{/if}
@@ -66,7 +73,7 @@
 		</div>
 
 		{#if data.skin.downloads.length > 0}
-			<div class="flex w-64 shrink-0 flex-col self-start max-lg:w-full rounded-lg bg-black/30">
+			<div class="flex w-64 shrink-0 flex-col self-start max-lg:w-full rounded-lg bg-surface">
 				{#each data.skin.downloads as file, i (file)}
 					{#if i > 0}
 						<hr class="m-0 border-white/10" />
@@ -84,6 +91,7 @@
 		{/if}
 	</div>
 
-	<Slideshow slug={data.skin.slug} images={data.skin.images} />
-
+	<div class="min-h-0 flex-1">
+		<Slideshow slug={data.skin.slug} images={data.skin.images} />
+	</div>
 </article>
