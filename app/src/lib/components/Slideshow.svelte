@@ -24,7 +24,7 @@
 				onemblaInit={onInit}
 			>
 				<div class="flex touch-pan-y touch-pinch-zoom">
-					{#each images as image, i}
+					{#each images as image, i (image)}
 						<img
 							src="/content/{slug}/{image}"
 							alt="Slide {i + 1}"
@@ -42,7 +42,8 @@
 			>
 				<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
 			</button>
-			{#each images as _, i}
+			<!-- eslint-disable-next-line @typescript-eslint/no-unused-vars -->
+		{#each images as _, i (i)}
 				<button
 					onclick={() => emblaApi?.scrollTo(i)}
 					class="mx-0.5 h-2.5 w-2.5 cursor-pointer rounded-full border-2 border-white/60 p-0 transition-all duration-300"

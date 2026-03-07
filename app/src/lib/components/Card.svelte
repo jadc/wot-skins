@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { resolve } from "$app/paths";
 	import type { SkinData } from "$lib/types";
 
 	let { skin }: { skin: SkinData } = $props();
@@ -7,7 +8,7 @@
 </script>
 
 <a
-	href="/{skin.slug}"
+	href={resolve("/[slug]", { slug: skin.slug })}
 	class="selectable group relative flex flex-col justify-end overflow-hidden border border-black p-4 text-left text-white no-underline"
 	style="aspect-ratio: 4/3;"
 >

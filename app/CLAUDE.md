@@ -30,11 +30,13 @@ All commands run from the `app/` directory using **bun** (provided via Nix flake
 ### Content System
 
 Content is a filesystem "database" in `static/content/{slug}/`:
+
 - `index.json` — metadata (name, artist, category, tank, tier, class, nation, weight, description, images[], downloads[])
 - `*.webp` — skin images (served directly from static)
 - `*.wotmod`, `*.fbx`, `*.zip` — downloadable files
 
 Server-side loading (`src/lib/server/content.ts`):
+
 - `getAllSkins()` — reads all `index.json` files, sorts by weight (asc) then date (newest first)
 - `getSkin(slug)` — reads single skin, returns null if not found
 

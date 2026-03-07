@@ -2,7 +2,9 @@
 	import "../app.css";
 	import Sidebar from "$lib/components/Sidebar.svelte";
 	import { goto } from "$app/navigation";
+	import { resolve } from "$app/paths";
 	import { page } from "$app/state";
+	import { SvelteSet, SvelteURLSearchParams } from "svelte/reactivity";
 	import type { Category, Tier, TankClass, Nation } from "$lib/types";
 
 	let { children } = $props();
@@ -21,10 +23,8 @@
 		(page.url.searchParams.get("nations")?.split(",").filter(Boolean) ?? []) as Nation[],
 	));
 
-	let debounceTimer: ReturnType<typeof setTimeout> | null = null;
-
 	function buildFilterQuery(): string {
-		const params = new URLSearchParams();
+		const params = new SvelteURLSearchParams();
 		if (search.trim()) params.set("search", search.trim());
 		if (categories.size > 0) params.set("categories", [...categories].join(","));
 		if (tiers.size > 0) params.set("tiers", [...tiers].join(","));
@@ -35,45 +35,43 @@
 
 	function navigate() {
 		const qs = buildFilterQuery();
-		goto(qs ? `/?${qs}` : "/", { keepFocus: true });
+		goto(resolve(qs ? `/?${qs}` : "/"), { keepFocus: true });
 	}
 
-	function navigateDebounced() {
-		if (debounceTimer) clearTimeout(debounceTimer);
-		debounceTimer = setTimeout(navigate, 300);
+	function toggle<T>(set: Set<T>, value: T): Set<T> {
+		const next = new SvelteSet(set);
+		if (next.has(value)) {
+			next.delete(value);
+		} else {
+			next.add(value);
+		}
+		return next;
 	}
 
 	function toggleCategory(value: Category) {
-		const next = new Set(categories);
-		next.has(value) ? next.delete(value) : next.add(value);
-		categories = next;
+		categories = toggle(categories, value);
 		navigate();
 	}
 
 	function toggleTier(value: Tier) {
-		const next = new Set(tiers);
-		next.has(value) ? next.delete(value) : next.add(value);
-		tiers = next;
+		tiers = toggle(tiers, value);
 		navigate();
 	}
 
 	function toggleClass(value: TankClass) {
-		const next = new Set(classes);
-		next.has(value) ? next.delete(value) : next.add(value);
-		classes = next;
+		classes = toggle(classes, value);
 		navigate();
 	}
 
 	function toggleNation(value: Nation) {
-		const next = new Set(nations);
-		next.has(value) ? next.delete(value) : next.add(value);
-		nations = next;
+		nations = toggle(nations, value);
 		navigate();
 	}
 
 	$effect(() => {
-		search;
-		navigateDebounced();
+		void search;
+		const timer = setTimeout(navigate, 300);
+		return () => clearTimeout(timer);
 	});
 </script>
 
@@ -83,16 +81,8 @@
 	<!-- OG / Discord -->
 	<meta property="og:site_name" content="chems" />
 	<meta name="twitter:site" content="chems" />
-	<meta content="#2F3136" data-react-helmet="true" name="theme-color" />
+	<meta content="#2F3136" name="theme-color" />
 	<meta property="og:type" content="website" />
-
-	<!-- Fonts -->
-	<link rel="preconnect" href="https://fonts.googleapis.com" />
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
-	<link
-		href="https://fonts.googleapis.com/css2?family=Roboto&family=Roboto+Mono&display=swap"
-		rel="stylesheet"
-	/>
 
 	<!-- Ads -->
 	<meta name="google-adsense-account" content="ca-pub-5365509455453456" />
