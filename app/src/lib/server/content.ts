@@ -30,12 +30,30 @@ export async function getAllSkins(): Promise<SkinData[]> {
 	return skins;
 }
 
+const IMAGE_EXTS = new Set([".webp", ".png", ".jpg", ".jpeg", ".gif"]);
+
 export async function getSkin(slug: string): Promise<SkinData | null> {
 	try {
-		const jsonPath = join(CONTENT_DIR, slug, "index.json");
-		const raw = await readFile(jsonPath, "utf-8");
+		const dir = join(CONTENT_DIR, slug);
+		const [raw, files] = await Promise.all([
+			readFile(join(dir, "index.json"), "utf-8"),
+			readdir(dir),
+		]);
 		const data = JSON.parse(raw);
-		return { slug, ...data } as SkinData;
+
+		const images: string[] = [];
+		const downloads: string[] = [];
+		for (const file of files.sort()) {
+			if (file === "index.json") continue;
+			const ext = file.substring(file.lastIndexOf(".")).toLowerCase();
+			if (IMAGE_EXTS.has(ext)) {
+				images.push(file);
+			} else {
+				downloads.push(file);
+			}
+		}
+
+		return { slug, ...data, images, downloads } as SkinData;
 	} catch {
 		return null;
 	}
