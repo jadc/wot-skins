@@ -35,10 +35,36 @@
 		ontoggleclass: (c: TankClass) => void;
 		ontogglenation: (n: Nation) => void;
 	} = $props();
+
+	let open = $state(false);
 </script>
 
-<aside class="m-4 flex min-w-[20em] basis-[20em] flex-col">
-	<section class="mb-2 bg-transparent p-0">
+<!-- Mobile sticky search + hamburger -->
+<div class="sticky top-0 z-10 flex items-center gap-2 bg-[#110a2a] pb-2 lg:hidden">
+	<button
+		onclick={() => (open = !open)}
+		class="flex-shrink-0 cursor-pointer rounded bg-[#0d0723] p-3 text-white"
+		aria-label="Toggle filters"
+	>
+		<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+			{#if open}
+				<path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+			{:else}
+				<path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+			{/if}
+		</svg>
+	</button>
+	<input
+		type="search"
+		bind:value={search}
+		placeholder="Search by skin name, artist, etc."
+		class="w-full rounded border border-transparent bg-[#0d0723] p-4 pl-12 text-white transition-all duration-300"
+		style="background-image: url('/icons/search.svg'); background-repeat: no-repeat; background-position: 1em center;"
+	/>
+</div>
+
+<aside class="sticky top-[1em] flex max-h-screen min-w-[20em] basis-[20em] self-start flex-col overflow-y-auto max-lg:static max-lg:max-h-none max-lg:min-w-0 max-lg:basis-auto max-lg:self-stretch" class:max-lg:hidden={!open}>
+	<section class="mb-2 bg-transparent p-0 max-lg:hidden">
 		<input
 			type="search"
 			bind:value={search}
