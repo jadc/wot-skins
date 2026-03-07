@@ -4,8 +4,8 @@ import { getAllSkins } from "$lib/server/content";
 import { parseFilterParams, filterSkins } from "$lib/server/filter";
 
 export const GET: RequestHandler = async ({ url }) => {
-	const allSkins = await getAllSkins();
-	const state = parseFilterParams(url);
-	const skins = filterSkins(allSkins, state);
-	return json({ skins });
+  const allSkins = await getAllSkins();
+  const state = parseFilterParams(url);
+  const skins = filterSkins(allSkins, state);
+  return json({ skins });
 };
