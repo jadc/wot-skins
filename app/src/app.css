@@ -1,12 +1,14 @@
 @import "tailwindcss" source(none);
 @source "../src";
 
+@theme {
+  --color-surface: rgba(0, 0, 0, 0.3);
+}
+
 body {
   font-family:
     -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial,
     sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-  display: flex;
-  margin: 0;
   background-attachment: fixed;
   background-color: rgb(20, 11, 53);
   background-image: url("/back.webp");
@@ -15,15 +17,15 @@ body {
   background-size: cover;
 }
 
-a {
-  text-decoration: none;
-  color: white;
-}
-
 .selectable {
   transition:
     box-shadow 300ms cubic-bezier(0.25, 0.8, 0.25, 1),
     border-color 300ms cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
 }
 
 .selectable:hover {
@@ -31,16 +33,4 @@ a {
     0 14px 28px rgba(0, 0, 0, 0.25),
     0 10px 10px rgba(0, 0, 0, 0.22);
   border-color: #eee;
-}
-
-.hide-scrollbar {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
-
-.hide-scrollbar::-webkit-scrollbar,
-.hide-scrollbar::-webkit-scrollbar-thumb,
-.hide-scrollbar::-webkit-scrollbar-track {
-  width: 0;
-  background: transparent;
 }
