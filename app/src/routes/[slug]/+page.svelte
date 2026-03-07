@@ -1,8 +1,19 @@
 <script lang="ts">
 	import { resolve } from "$app/paths";
+	import { page } from "$app/state";
 	import Slideshow from "$lib/components/Slideshow.svelte";
 
 	let { data } = $props();
+
+	let title = $derived(data.skin.name ?? data.skin.slug);
+	let description = $derived(
+		[data.skin.tank, data.skin.description].filter(Boolean).join(" — ") || title,
+	);
+	let imageUrl = $derived(
+		data.skin.images.length > 0
+			? `${page.url.origin}/content/${data.skin.slug}/${data.skin.images[0]}`
+			: null,
+	);
 
 	let formattedDate = $derived(
 		data.skin.date
@@ -14,6 +25,18 @@
 			: null,
 	);
 </script>
+
+<svelte:head>
+	<title>{title} - chems</title>
+	<meta property="og:title" content={title} />
+	<meta name="description" content={description} />
+	<meta property="og:description" content={description} />
+	<meta name="twitter:card" content="summary_large_image" />
+	{#if imageUrl}
+		<meta property="og:image" content={imageUrl} />
+		<meta name="twitter:image" content={imageUrl} />
+	{/if}
+</svelte:head>
 
 <article class="flex flex-col gap-4 text-white">
 	<div>
