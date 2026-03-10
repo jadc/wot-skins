@@ -2,7 +2,9 @@ import { readdir, readFile } from "node:fs/promises";
 import { join } from "node:path";
 import type { SkinData } from "$lib/types";
 
-const CONTENT_DIR = "static/content";
+import { env } from "$env/dynamic/private";
+
+export const CONTENT_DIR = env.CONTENT_DIR ?? "static/content";
 
 let cachedSkins: SkinData[] | null = null;
 
